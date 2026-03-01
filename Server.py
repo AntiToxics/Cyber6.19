@@ -40,7 +40,7 @@ def handle_ping(dst_ip):
                 logging.error(f"Error scanning port {dport}: {e}")
                 print("Error while scanning")
                 
-            logging.info("Scanning complete")
+        logging.info("Scanning complete")
         print("-------All of the available ports-------")
         if AVAILABLE_PORTS:
             for port in AVAILABLE_PORTS:
