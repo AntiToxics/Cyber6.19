@@ -11,11 +11,14 @@ from scapy.all import *
 from scapy.layers.inet import TCP, IP
 import logging
 
+#---------Constants---------
 FLAG_SYN = "S"
 FLAG_SYN_ACK = "SA"
 SPORT = 8694
-AVAILABLE_PORTS = []
 TIMEOUT = 0.5
+
+#-----------variables------------
+available_ports = []
 
 def handle_ping(dst_ip):
     """
@@ -35,15 +38,15 @@ def handle_ping(dst_ip):
                 print(f"Scanning port: {dport}")
                 if response and response.haslayer(TCP):
                     if response[TCP].flags == FLAG_SYN_ACK:
-                        AVAILABLE_PORTS.append(dport)
+                        available_ports.append(dport)
             except Exception as e:
                 logging.error(f"Error scanning port {dport}: {e}")
                 print("Error while scanning")
-                
+
         logging.info("Scanning complete")
         print("-------All of the available ports-------")
-        if AVAILABLE_PORTS:
-            for port in AVAILABLE_PORTS:
+        if available_ports:
+            for port in available_ports:
                 print(f"Port {port} is open")
         else:
             print("No available ports")
