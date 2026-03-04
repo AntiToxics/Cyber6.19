@@ -28,7 +28,7 @@ def handle_ping(dst_ip):
     """
     try:
         logging.info("Starting to scan")
-        for dport in range(24, 1025):
+        for dport in range(20, 1025):
             try:
                 pkt = IP(dst=dst_ip) / TCP(dport=dport, sport=SPORT, flags=FLAG_SYN)
                 response = sr1(pkt, timeout= TIMEOUT, verbose=0)
