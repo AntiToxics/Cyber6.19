@@ -15,7 +15,7 @@ FLAG_SYN = "S"
 FLAG_SYN_ACK = "SA"
 SPORT = 8694
 AVAILABLE_PORTS = []
-
+TIMEOUT = 0.5
 
 def handle_ping(dst_ip):
     """
@@ -31,7 +31,7 @@ def handle_ping(dst_ip):
         for dport in range(24, 1025):
             try:
                 pkt = IP(dst=dst_ip) / TCP(dport=dport, sport=SPORT, flags=FLAG_SYN)
-                response = sr1(pkt, timeout=0.5, verbose=0)
+                response = sr1(pkt, timeout= TIMEOUT, verbose=0)
                 print(f"Scanning port: {dport}")
                 if response and response.haslayer(TCP):
                     if response[TCP].flags == FLAG_SYN_ACK:
